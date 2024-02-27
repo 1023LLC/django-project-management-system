@@ -10,11 +10,13 @@
     <div class="mt-6 grid grid-cols-4 gap-4">
         {% for project in projects %}
             <div class="py-6 px-6 bg-slate-200">
-                <h2 class="mb-4 text-xl">{{ project.name }}</h2>
+                <a href="{% url 'project:project' project.id %}">
+                    <h2 class="mb-4 text-xl">{{ project.name }}</h2>
 
-                <p class="text-sm text-slate-600">
-                    {{project.description}}
-                </p>
+                    <p class="text-sm text-slate-600">
+                        {{project.description}}
+                    </p>
+                </a>
             </div>
         {% endfor %}
     </div>
