@@ -68,3 +68,16 @@ def edit(request, pk):
     
     return render(request, 'project/edit.html', {'form': form, 'project': project})
 
+
+@login_required
+def delete(request, pk):
+    project = get_object_or_404(Project, pk=pk, created_by=request.user)
+    
+    project.delete()
+    
+    return redirect('/projects/')
+
+    
+
+    
+

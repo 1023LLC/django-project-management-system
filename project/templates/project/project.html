@@ -4,7 +4,7 @@
   >Add ToDo List</a
 >
 <a href="{% url  'project:edit' project.id %}" class="py-4 px-8 bg-sky-600 text-white inline-block">Edit</a>
-<a href="#" class="py-4 px-8 bg-amber-600 text-white inline-block">Delete</a>
+<a href="{% url 'project:delete' project.id %}" class="py-4 px-8 bg-amber-600 text-white inline-block">Delete</a>
 
 <div class="mt-6 grid grid-cols-4 gap-4">
   {% for todolist in todolists %}
