@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .forms import ProjectForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Project
 from django.contrib.auth.decorators import login_required
 
@@ -17,15 +17,28 @@ def projects(request):
 
 @login_required
 def project(request, pk):
-    project = Project.objects.filter(created_by=request.user).get(pk=pk)
+    project = get_object_or_404(Project, pk=pk, created_by=request.user)
     
     return render(request, 'project/project.html', {'project':project})
 
 
+@login_required
+def edit(request, pk):
+    project = get_object_or_404(Project, pk=pk, created_by=request.user)
+    
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('/projects/')
+    else:
+        form = ProjectForm(instance=project)  # Pass the instance to pre-populate the form
+    
+    return render(request, 'project/edit.html', {'form': form, 'project': project})
 
 
 @login_required
-def add_project(request):
+def add(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
@@ -39,3 +52,19 @@ def add_project(request):
     else:
         form = ProjectForm()
     return render(request, 'project/add.html', {'form': form})
+
+
+@login_required
+def edit(request, pk):
+    project = get_object_or_404(Project, pk=pk, created_by=request.user)
+    
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('/projects/')
+    else:
+        form = ProjectForm(instance=project)  
+    
+    return render(request, 'project/edit.html', {'form': form, 'project': project})
+
