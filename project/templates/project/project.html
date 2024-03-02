@@ -9,7 +9,7 @@
 <div class="mt-6 grid grid-cols-4 gap-4">
   {% for todolist in project.todolists.all %}
   <div class="py-6 px-6 bg-slate-200">
-    <a href="#">
+    <a href="{% url 'todolist:todolist' project.id %}">
       <h2 class="mb-4 text-xl">{{ todolist.name }}</h2>
 
       <p class="text-sm text-slate-600">{{todolist.description}}</p>

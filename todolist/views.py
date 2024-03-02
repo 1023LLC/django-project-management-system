@@ -6,6 +6,20 @@ from .models import Todolist
 from project.models import Project
 from .forms import TodolistForm
 
+
+
+def todolist(request, project_id, pk):
+    project = get_object_or_404(Project, pk=project_id, created_by=request.user)
+    todolist = get_object_or_404(Todolist, project=project, pk=pk)
+    
+    
+    return render(request, 'todolist/todolist.html', {'project':project, 'todolist':todolist})
+    
+
+
+
+
+
 def add(request, project_id):
     project = get_object_or_404(Project, pk=project_id, created_by=request.user)
     
