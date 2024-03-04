@@ -22,8 +22,10 @@ def todolist(request, project_id, pk):
 
 def add(request, project_id):
     project = get_object_or_404(Project, pk=project_id, created_by=request.user)
+
     
     if request.method == 'POST':
+        # initialize the form with the POST data
         form = TodolistForm(request.POST)
         
         if form.is_valid:
