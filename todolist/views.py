@@ -37,6 +37,7 @@ def add(request, project_id):
             
             return redirect(f'/projects/{project_id}/')
     else:
+        #if request is GET, initialize an empty form
         form = TodolistForm()
         
     return render(request, 'todolist/add.html', {'form':form, 'project':project})
