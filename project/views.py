@@ -39,6 +39,7 @@ def edit(request, pk):
 
 @login_required
 def add(request):
+    #Checking if the form has been submitted 
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():

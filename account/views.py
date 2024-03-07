@@ -38,7 +38,8 @@ def signup(request):
         
         if name and email and password1 and password2:
             user = User.objects.create_user(name, email, password1)
-            
+
+            #Success message
             print('User created:', user)
             
             return redirect('/login/')
