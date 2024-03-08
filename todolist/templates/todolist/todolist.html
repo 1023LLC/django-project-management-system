@@ -9,8 +9,8 @@
 <a href="#" class="py-4 px-8 bg-emerald-600 text-white inline-block"
   >Add task</a
 >
-<a href="#" class="py-4 px-8 bg-sky-600 text-white inline-block">Edit</a>
-<a href="#" class="py-4 px-8 bg-amber-600 text-white inline-block">Delete</a>
+<a href="{% url 'todolist:edit' project.id todolist.id %}" class="py-4 px-8 bg-sky-600 text-white inline-block">Edit</a>
+<a href="{% url 'todolist:delete' project.id todolist.id %}" class="py-4 px-8 bg-amber-600 text-white inline-block">Delete</a>
 
 <div class="mt-6 grid grid-cols-4 gap-4">
   {% for task in todolist.tasks.all %}
