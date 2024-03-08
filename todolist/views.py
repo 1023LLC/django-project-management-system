@@ -57,6 +57,8 @@ def edit(request, project_id, pk):
         if name:
             todolist.name = name
             todolist.description = description
+            print(name)
+            print(description)
             todolist.save()
             
             return redirect(f'/projects/{project_id}/{pk}/')    
