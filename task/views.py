@@ -22,9 +22,19 @@ def add(request, project_id, todolist_id):
             task.todolist = todolist
             task.save()
             
-            
             return redirect(f'/projects/{project_id}/{todolist_id}/')
     else:
         form = TaskForm()
         
     return render(request, 'task/add.html', {'form': form, 'project': project, 'todolist': todolist})
+
+
+@login_required
+def detail(request, project_id, todolist_id, pk):
+    
+    project = get_object_or_404(Project, pk=project_id, created_by=request.user)
+    todolist = get_object_or_404(Todolist, project=project, pk=todolist_id)
+    task = get_object_or_404(Task, project=project, todolist=todolist, pk=pk)
+    
+    
+    return render(request, 'task/detail.html', {'task':task})
